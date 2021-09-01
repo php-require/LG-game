@@ -196,7 +196,7 @@ let app = new Vue({
     }
 })
 
-let audio = new Audio('audio/soundtrack1.mp3')
+let audio = new Audio('audio/soundtrack.mp3')
 let audio_btn = document.querySelector('.btn__sound')
 let audio_icon = document.querySelector('.btn__sound i')
 
