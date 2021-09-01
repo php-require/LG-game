@@ -233,6 +233,12 @@ i.fa-star {
 .app__results-inner {
     color: white;
     padding: 20px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px auto;
+    border: 1px solid #a6c0e4;
 }
 
 .results__title {
