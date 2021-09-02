@@ -92,11 +92,12 @@ let app = new Vue({
             this.showQuestions = false
             this.showResalt = true
             this.resultRace = race
-            if (race == 'honest' || race == 'best') {
-                this.styleObject.color = '#7d7d7d'
+            if (race == 'honest') {
+                this.styleObject.color = 'white'
             } else {
                 this.styleObject.color = 'white'
             }
+
         },
         nextQuestions(answer) {
             if (this.number == 24) {

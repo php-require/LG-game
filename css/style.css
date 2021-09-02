@@ -261,6 +261,9 @@ i.fa-star {
     margin-bottom: 20px;
     font-size: 16px;
     line-height: 20px;
+    background-color: #0000004a;
+    padding: 22px;
+    border-radius: 4px;
 }
 
 .results__text {
