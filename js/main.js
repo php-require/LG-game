@@ -25,7 +25,7 @@ let app = new Vue({
             best: 0,
             honest: 0,
             infested: 0,
-            hybrid: 0,
+            // hybrid: 0,
         },
         totalGames: localStorage.getItem('sc2TotalGames') ? localStorage.getItem('sc2TotalGames') : 0,
         questions: questions,
@@ -138,7 +138,7 @@ let app = new Vue({
                 this.totalGame.best++
 
                     // notSuitable
-            } else if (this.score.notSuitable >= 11) {
+            } else if (this.score.notSuitable >= 8) {
                 this.goToResult('notSuitable')
                 this.totalGame.notSuitable++
 
