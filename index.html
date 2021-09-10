@@ -24,13 +24,14 @@
                     <i class="fa fa-lightbulb-o" aria-hidden="true"></i>
                     <div class="app__btn-text">Об игре</div>
                 </button>
-                <button class="app__btn" @click="goToQuestions">
+                <button class="app__btn" @click="goToALLQuestions">
                     <i class="fa fa-play-circle-o" aria-hidden="true"></i>
-                    <div class="app__btn-text">Начать</div>
+                    <div class="app__btn-text">Выбрать тест</div>
                 </button>
+
                 <button class="app__btn" @click="goToAchivments">
                     <i class="fa fa-trophy" aria-hidden="true"></i>
-                    <div class="app__btn-text">Мои Типажи</div>
+                    <div class="app__btn-text">Мои Достижения</div>
                 </button>
                 <button class="app__btn" @click="goToSocial">
                     <i class="fa fa-user" aria-hidden="true"></i>
@@ -38,28 +39,48 @@
                 </button>
             </div>
         </div>
+        <!--all questions-->
+        <div class="app" v-show="showAllQuestions">
+            <div class="app__header">
+                <img src="img/logo.png" class="app__logo">
+            </div>
+            <div class="app_body">
+                <p class="app__moreText">Пройдите тест: "Тест Жена" - для открытия следующего.</p>
+                <button :id="'disabled' + i" disabled class="app__allQuest" v-for="(item, i)  in allTestArr[0]" @click="chooseQuestions(i, allTestArr[0][i])" :value="i">
+                    <img class="app__allQuestImg" src="img/starGray.png" alt="">
+                    <p> {{ item }}</p>
+                </button>
+
+                <div class="app__body-bottom">
+                    <button class="app__btn btn__back btn__achivment" @click="goToMain">
+                        <i class="fa fa-reply" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
         <!--achivments display-->
         <div class="app achivments" v-show="showAchivments">
             <div class="app__body">
                 <div class="app_body-inner">
                     <h2 class="app__body-title">
-                        <i class="fa fa-trophy" aria-hidden="true"></i> Мои типажи
+                        <i class="fa fa-trophy" aria-hidden="true"></i> Мои достижения
                     </h2>
+                    <p class="app__card-textUnderHead"></p>
                     <div class="app__body-top">
                         <div class="app__card">
                             <div class="app__card-text">Счёт</div>
                             <div class="app__card-count">{{ totalScore }}</div>
                         </div>
                         <div class="app__card">
-                            <div class="app__card-text">Открыто типажей</div>
-                            <div class="app__card-count">{{ openRaces }} из 7</div>
+                            <div class="app__card-text">Открыто Карточек</div>
+                            <div class="app__card-count">{{ openRaces }} из 9</div>
                         </div>
                         <div class="app__card">
                             <div class="app__card-text">Всего игр</div>
                             <div class="app__card-count">{{ totalGames }}</div>
                         </div>
                         <div class="app__card">
-                            <div class="app__card-text">Ваш основной типаж</div>
+                            <div class="app__card-text">Ваш любимый результат</div>
                             <div class="app__card-count">{{ favoriteRace }}</div>
                         </div>
                     </div>
@@ -85,12 +106,15 @@
         <div class="app" v-show="showQuestions">
             <div class="app__header">
                 <div class="app__header-inner">
+                    <div class="app__test"> {{ itemName }}</div>
+                    <hr>
                     <div class="app__count"># {{ number + 1 }}</div>
                     <div class="app__text">{{ questions[number][0] }}</div>
                 </div>
             </div>
+
             <div class="app__body">
-                <button class="app__btn" v-for="(answer, i) in questions[number][1]" @click="nextQuestions(questions[number][2][i])">
+                <button class="app__btn" v-for="(answer, i) in questions[number][1]" @click="nextQuestions(questions[number][2][i])" :value="answer">
                     <div class="app__btn-text">{{ answer }}</div>
                 </button>
             </div>

@@ -53,6 +53,21 @@ i.fa {
     padding: 0 10px;
 }
 
+hr {
+    height: 1px;
+    width: 140px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #ff6e00;
+}
+
+.app__moreText {
+    display: flex;
+    color: white;
+    justify-content: center;
+    padding: 40px 30px;
+}
+
 .app__logo {
     padding: 20px 0;
     display: block;
@@ -86,6 +101,65 @@ i.fa {
     text-transform: uppercase;
     border: 3px solid #f7f7f7;
     background-color: rgb(255 190 128 / 70%);
+}
+
+.app__allQuest {
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    width: 340px;
+    box-shadow: 0px 1px 0px 0px #f5b6739e;
+    margin: 10px auto;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+    text-transform: uppercase;
+    border: 3px solid #f7f7f7;
+    background-color: rgb(255 190 128 / 70%);
+}
+
+button:disabled {
+    background: rgb(0 0 0 / 70%);
+    color: darkgray;
+}
+
+button:disabled .app__allQuestImg {
+    animation: none
+}
+
+.app__allQuest p {
+    padding-left: 22px;
+    text-align: left;
+}
+
+.app__allQuestImg {
+    width: 30px;
+    height: 30px;
+    -webkit-animation: spin 9s linear infinite;
+    -moz-animation: spin 9s linear infinite;
+    animation: spin 9s linear infinite;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .app__textAbout {
@@ -128,6 +202,12 @@ i.fa {
     grid-template-rows: max-content max-content;
     place-content: center center;
     margin-bottom: 20px;
+}
+
+.app__card-textUnderHead {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .app__card {
@@ -311,8 +391,23 @@ i.fa-star {
     background-position: 40% 0;
 }
 
+.app.results[data-race="loser"] {
+    background-image: url(../img/loser_bg.jpg);
+    background-position: 40% 0;
+}
+
+.app.results[data-race="win"] {
+    background-image: url(../img/win_bg.jpg);
+    background-position: 40% 0;
+}
+
 .app.results[data-race="hybrid"] {
     background-image: url(../img/hybrid_bg.jpg);
+    background-position: 45% 0;
+}
+
+.app.results[data-race="wife"] {
+    background-image: url(../img/wife_bg.jpg);
     background-position: 45% 0;
 }
 
@@ -336,12 +431,27 @@ i.fa-star {
 .btn__honest {
     background-color: #818380;
     color: #f1f1f1;
+    border-color: #e2d1e9;
 }
 
-.btn__best {
+.btn__wife {
+    background-color: #322b0f;
+}
+
+.btn__win {
     background-color: #8feaf8;
 }
 
+.btn__loser {
+    background-color: #de5a63;
+}
+
+.btn__best {
+    background-color: #f2ff62;
+    color: #8ee92c;
+    border-color: #8ee92c;
+}
+
 .btn__hybrid {
-    background-color: #fc7654;
+    background-color: #de363e;
 }

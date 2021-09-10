@@ -2,12 +2,16 @@ let app = new Vue({
     el: '.main',
     data: {
         showAbout: false,
+        allTest: false,
+        showAllQuestions: false,
         showMain: true,
         showSocial: false,
         showAchivments: false,
         showQuestions: false,
         showResalt: false,
+        itemName: '',
         number: 0,
+        allTestArr: [],
         styleObject: {
             color: 'white'
         },
@@ -17,6 +21,11 @@ let app = new Vue({
             notSuitable: 0,
             best: 0,
             honest: 0,
+            infested: 0,
+            hybrid: 0,
+            wife: 0,
+            loser: 0,
+            win: 0,
         },
         totalGame: localStorage.getItem('sc2TotalGame') ? JSON.parse(localStorage.getItem('sc2TotalGame')) : {
             defective: 0,
@@ -25,7 +34,10 @@ let app = new Vue({
             best: 0,
             honest: 0,
             infested: 0,
-            // hybrid: 0,
+            hybrid: 0,
+            wife: 0,
+            loser: 0,
+            win: 0,
         },
         totalGames: localStorage.getItem('sc2TotalGames') ? localStorage.getItem('sc2TotalGames') : 0,
         questions: questions,
@@ -33,7 +45,36 @@ let app = new Vue({
         resultRace: 'infested',
     },
     methods: {
+        getInfo() {
+            // Open first question
+            if (document.getElementById("disabled0")) {
+                document.getElementById("disabled0").disabled = false
+                document.getElementById("disabled0").getElementsByTagName("img")[0].setAttribute("src", "img/star.png")
+                if (JSON.parse(localStorage.getItem('sc2TotalGame'))) {
+                    lavel = JSON.parse(localStorage.getItem('sc2TotalGame'))
+                    if (lavel.best > 0) {
+                        document.getElementById("disabled1").disabled = false
+                        document.getElementById("disabled1").getElementsByTagName("img")[0].setAttribute("src", "img/star.png")
+                    }
+                    if (lavel.honest > 0) {
+                        document.getElementById("disabled2").disabled = false
+                        document.getElementById("disabled2").getElementsByTagName("img")[0].setAttribute("src", "img/star.png")
+                    }
+                    if (lavel.wife > 0) {
+                        document.getElementById("disabled3").disabled = false
+                        document.getElementById("disabled3").getElementsByTagName("img")[0].setAttribute("src", "img/star.png")
+                    }
+                }
+            }
+
+
+
+
+
+        },
+
         goToMain() {
+            this.showAllQuestions = false
             this.showAbout = false
             this.showMain = true
             this.showSocial = false
@@ -42,6 +83,7 @@ let app = new Vue({
             this.showResalt = false
         },
         goToAbout() {
+            this.showAllQuestions = false
             this.showAbout = true
             this.showMain = false
             this.showSocial = false
@@ -51,6 +93,7 @@ let app = new Vue({
         },
 
         goToSocial() {
+            this.showAllQuestions = false
             this.showAbout = false
             this.showMain = false
             this.showSocial = true
@@ -60,6 +103,7 @@ let app = new Vue({
         },
         goToAchivments() {
             if (this.totalGames > 0) {
+                this.showAllQuestions = false
                 this.showAbout = false
                 this.showMain = false
                 this.showSocial = false
@@ -67,10 +111,11 @@ let app = new Vue({
                 this.showQuestions = false
                 this.showResalt = false
             } else {
-                this.goToQuestions()
+                this.goToALLQuestions()
             }
         },
         goToQuestions() {
+            this.showAllQuestions = false
             this.showAbout = false
             this.score = {
                     defective: 0,
@@ -78,6 +123,10 @@ let app = new Vue({
                     notSuitable: 0,
                     best: 0,
                     honest: 0,
+                    hybrid: 0,
+                    wife: 0,
+                    loser: 0,
+                    win: 0,
                 },
                 this.showMain = false
             this.showSocial = false
@@ -85,7 +134,38 @@ let app = new Vue({
             this.showQuestions = true
             this.showResalt = false
         },
+        chooseQuestions(item, itemName) {
+            this.itemName = itemName
+
+            if (item == 0) {
+                this.questions = questions
+
+                this.goToQuestions()
+            } else if (item == 1) {
+                this.questions = questions1
+                this.goToQuestions()
+            } else if (item == 2) {
+                this.questions = questions2
+                this.goToQuestions()
+            } else if (item == 3) {
+                this.questions = questions3
+                this.goToQuestions()
+            }
+
+        },
+        goToALLQuestions() {
+            this.showAllQuestions = true
+            this.showAbout = false
+            this.showMain = false
+            this.showSocial = false
+            this.showAchivments = false
+            this.showQuestions = false
+            this.showResalt = false
+            this.allTestArr = allTestArr
+
+        },
         goToResult(race) {
+            this.showAllQuestions = false
             this.showMain = false
             this.showSocial = false
             this.showAchivments = false
@@ -99,12 +179,16 @@ let app = new Vue({
             }
 
         },
+
         nextQuestions(answer) {
-            if (this.number == 24) {
+            if (this.number == 9) {
                 this.number = 0
 
                 this.endGame()
             } else {
+
+                console.log(answer)
+
                 this.number++
 
             }
@@ -118,36 +202,40 @@ let app = new Vue({
             }
             this.totalGames++
                 localStorage.setItem('sc2TotalGames', this.totalGames)
-                // defective
-            if (this.score.defective >= 5) {
+
+            if (this.score.defective > this.score.best) {
                 this.goToResult('defective')
                 this.totalGame.defective++
-                    // primle
-            } else if (this.score.rsp >= 9) {
-                this.goToResult('rsp')
-                this.totalGame.rsp++
 
-                    //honest
-            } else if (this.score.honest >= 11) {
-                this.goToResult('honest')
-                this.totalGame.honest++
-
-                    // best
-            } else if (this.score.best >= 18) {
+            } else if (this.score.defective < this.score.best) {
                 this.goToResult('best')
                 this.totalGame.best++
 
-                    // notSuitable
-            } else if (this.score.notSuitable >= 8) {
+            } else if (this.score.honest > this.score.notSuitable) {
+                this.goToResult('honest')
+                this.totalGame.honest++
+
+                    //notSuitable
+            } else if (this.score.honest < this.score.notSuitable) {
                 this.goToResult('notSuitable')
                 this.totalGame.notSuitable++
 
-                    // hybrid
-            } else if (this.score.defective == 30) {
+            } else if (this.score.hybrid < this.score.wife) {
+                this.goToResult('wife')
+                this.totalGame.wife++
+
+            } else if (this.score.hybrid > this.score.wife) {
                 this.goToResult('hybrid')
                 this.totalGame.hybrid++
 
-                    //infested
+            } else if (this.score.loser > this.score.win) {
+                this.goToResult('loser')
+                this.totalGame.loser++
+
+            } else if (this.score.loser < this.score.win) {
+                this.goToResult('win')
+                this.totalGame.win++
+
             } else {
                 this.goToResult('infested')
                 this.totalGame.infested++
@@ -192,7 +280,13 @@ let app = new Vue({
                 'notSuitable': this.totalGame.notSuitable > 0 ? true : false,
                 'infested': this.totalGame.infested > 0 ? true : false,
                 'hybrid': this.totalGame.hybrid > 0 ? true : false,
+                'wife': this.totalGame.wife > 0 ? true : false,
+                'loser': this.totalGame.loser > 0 ? true : false,
+                'win': this.totalGame.win > 0 ? true : false,
             }
         }
-    }
+    },
+    updated() {
+        this.getInfo()
+    },
 })
