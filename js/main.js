@@ -67,8 +67,27 @@ let app = new Vue({
                 }
             }
 
+        },
 
+        showLastTest() {
+            document.querySelector('p.app__moreText').innerHTML = "Пройдите тест: Насколько хорошо вы разбираетесь в мужчинах - для открытия следующего."
+            lavel = JSON.parse(localStorage.getItem('sc2TotalGame'))
+            if (lavel.best > 0) {
 
+                document.querySelector('p.app__moreText').innerHTML = "Пройдите: На верность"
+            }
+            if (lavel.honest > 0) {
+
+                document.querySelector('p.app__moreText').innerHTML = "Пройдите тест: На крепкую семью"
+            }
+            if (lavel.wife > 0) {
+
+                document.querySelector('p.app__moreText').innerHTML = "Тест: Xорошая ли вы жена"
+            }
+            if (lavel.win > 0) {
+
+                document.querySelector('p.app__moreText').innerHTML = "Поздравляем тест на идеальную жену ПРОЙДЕН!"
+            }
 
 
         },
@@ -288,5 +307,6 @@ let app = new Vue({
     },
     updated() {
         this.getInfo()
+        this.showLastTest()
     },
 })
