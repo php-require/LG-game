@@ -206,23 +206,14 @@ let app = new Vue({
         nextQuestions(answer) {
             if (this.number == 9) {
                 this.number = 0
-
                 this.endGame()
             } else {
-
-                console.log(answer)
-
                 this.number++
-
             }
             eval(answer)
 
         },
         endGame() {
-            for (let i in this.score) {
-                console.log(i)
-                console.log(this.score[i])
-            }
             this.totalGames++
                 localStorage.setItem('sc2TotalGames', this.totalGames)
 
